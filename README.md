@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/lahiruanushka/JobFinderApp-Demo" target="_blank">
-        <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="JobFinderApp Logo">
+        <img src="public/images/job-work-svgrepo-com.svg" width="400" alt="JobFinderApp Logo">
     </a>
 </p>
 
