@@ -25,6 +25,10 @@
                 @endif
             </div>
         </div>
+
+         <div class="mt-6 p-4">
+            {{ $listings->links('vendor.pagination.bootstrap-5') }}
+        </div>
     </div>
 
 </x-layout>

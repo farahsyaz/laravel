@@ -9,6 +9,10 @@ class Listing extends Model
 {
     use HasFactory;
 
+    //  protected $fillable = [
+    //     'title', 'tags', 'company', 'location', 'email', 'website', 'description'
+    // ];
+    
     public function scopeFilter($query, array $filters){
         if($filters['tag'] ?? false){
             $query->where('tags','like','%'.request('tag').'%');
@@ -18,7 +22,7 @@ class Listing extends Model
     $query->where('title', 'like', '%' . request('search') . '%')
           ->orWhere('description', 'like', '%' . request('search') . '%')
           ->orWhere('tags', 'like', '%' . request('search') . '%');
-}
-
+        }
     }
+
 }
