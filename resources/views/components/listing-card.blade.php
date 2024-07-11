@@ -1,7 +1,6 @@
 @props(['listing'])
 
 <x-card>
-    <div class="card mb-4 shadow-sm">
         <div class="row no-gutters">
             <div class="col-md-4">
                 <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/no-image.jfif') }}" class="card-img" alt="Listing Image">
@@ -26,5 +25,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </x-card>

@@ -2,7 +2,7 @@
     <div class="container mt-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
-                <div class="card shadow-sm">
+                <x-card>
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 mb-3">
@@ -41,7 +41,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </x-card>
+
+                <x-card class="mt-4">
+    <a href="/listings/{{$listing->id}}/edit" class="btn btn-outline-primary">
+        <i class="fas fa-pencil-alt"></i> Edit Post
+    </a>
+</x-card>
+
             </div>
         </div>
     </div>

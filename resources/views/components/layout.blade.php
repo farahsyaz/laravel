@@ -80,15 +80,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="text-muted py-4 bg-light">
-        <div class="container">
-            <p class="mb-1">© 2024 JOB Finder. All rights reserved.</p>
-            <p class="mb-0">
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-            </p>
-        </div>
-    </footer>
-
+   <footer class="text-muted py-4 bg-light">
+            <div class="container">
+                <p class="mb-1">© 2024 JOB Finder. All rights reserved.</p>
+                <p class="mb-0">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </p>
+            </div>
+        </footer>
+        
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
