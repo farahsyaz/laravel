@@ -1,4 +1,3 @@
-<!-- resources/views/partials/hero.blade.php -->
 <section class="hero-section">
     <div class="container">
         <div class="row">
