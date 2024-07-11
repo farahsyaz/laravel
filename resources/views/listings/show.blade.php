@@ -43,11 +43,24 @@
                     </div>
                 </x-card>
 
-                <x-card class="mt-4">
-    <a href="/listings/{{$listing->id}}/edit" class="btn btn-outline-primary">
-        <i class="fas fa-pencil-alt"></i> Edit Post
-    </a>
+    <x-card class="mt-4">
+    <div class="card-body">
+        <div class="row">
+            <a href="/listings/{{$listing->id}}/edit" class="btn btn-outline-primary mr-2">
+                <i class="fas fa-pencil-alt"></i> Edit Post
+            </a>                            
+                                  
+            <form method="POST" action="/listings/{{$listing->id}}">
+                @csrf
+                @method('DELETE')
+                <button class="btn btn-outline-danger">
+                    <i class="fas fa-trash"></i> Delete Post
+                </button>
+            </form>
+        </div>
+    </div>
 </x-card>
+
 
             </div>
         </div>
