@@ -5,7 +5,8 @@
             <div class="col-md-12">
                 <h1>Welcome to JOB Finder</h1>
                 <p>Find the perfect job for your career.</p>
-                <!-- Add any additional content for the hero section -->
+                <a href="{{ route('listings.create') }}" class="btn btn-primary">Create Job</a>
+
             </div>
         </div>
     </div>
