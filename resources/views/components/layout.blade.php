@@ -1,4 +1,3 @@
-<!-- resources/views/layouts/app.blade.php -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +10,12 @@
 
     <!-- Bootstrap CSS CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Alpine JS CDN -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+    <!-- Add this line to your HTML head -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+
     <style>
         .hero-section {
             background-color: #f8f9fa;
@@ -44,9 +49,6 @@
                     <!-- Add more navbar links as needed -->
                 </ul>
                 
-                <!-- Include Search Partial -->
-                @include('partials._search')
-                
                 <!-- Authentication Links -->
                 <ul class="navbar-nav ml-auto">
                     @guest <!-- Show login and signup when user is not logged in -->
@@ -72,19 +74,21 @@
 
     <!-- Main Content Area -->
     <main class="container mt-4">
+            <!-- Flash message -->
+            <x-flash-message />
         {{$slot}}
     </main>
 
     <!-- Footer -->
-    <footer class="text-muted py-4 bg-light">
-        <div class="container">
-            <p class="mb-1">© 2024 JOB Finder. All rights reserved.</p>
-            <p class="mb-0">
-                <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
-            </p>
-        </div>
-    </footer>
-
+   <footer class="text-muted py-4 bg-light">
+            <div class="container">
+                <p class="mb-1">© 2024 JOB Finder. All rights reserved.</p>
+                <p class="mb-0">
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+                </p>
+            </div>
+        </footer>
+        
     <!-- Bootstrap JS, Popper.js, and jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>

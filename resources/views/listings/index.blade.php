@@ -2,6 +2,9 @@
     <!-- Include Hero Partial -->
     @include('partials._hero')
 
+    <!-- Include Search Partial -->
+    @include('partials._search')
+
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
@@ -21,6 +24,10 @@
                     </div>
                 @endif
             </div>
+        </div>
+
+         <div class="mt-6 p-4">
+            {{ $listings->links('vendor.pagination.bootstrap-5') }}
         </div>
     </div>
 
