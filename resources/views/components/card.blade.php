@@ -1,3 +1,4 @@
-   <div {{$attributes->merge(['class' =>'col-md-8 offset-md-2'])}}>
-        {{$slot}}
-   </div>
+<!-- resources/views/components/card.blade.php -->
+<div {{ $attributes->merge(['class' => 'card shadow-sm']) }}>
+    {{ $slot }}
+</div>
