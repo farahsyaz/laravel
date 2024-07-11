@@ -72,7 +72,7 @@
 
     <!-- Main Content Area -->
     <main class="container mt-4">
-        @yield('content')
+        {{$slot}}
     </main>
 
     <!-- Footer -->

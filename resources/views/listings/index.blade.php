@@ -1,13 +1,11 @@
-@extends('layout')
-
-@section('content')
+<x-layout>
     <!-- Include Hero Partial -->
     @include('partials._hero')
 
     <div class="container mt-4">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="mb-4">{{ $heading }}</h1>
+                <h1 class="mb-4">Job Listings</h1>
 
                 @if(count($listings) == 0)
                     <div class="alert alert-danger" role="alert">
@@ -25,4 +23,5 @@
             </div>
         </div>
     </div>
-@endsection
+
+</x-layout>

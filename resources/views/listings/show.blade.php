@@ -1,6 +1,4 @@
-@extends('layout')
-
-@section('content')
+<x-layout>
 <div class="container m-5">
     <div class="row justify-content-center">
         <div class="col-lg-8">
@@ -32,4 +30,4 @@
         </div>
     </div>
 </div>
-@endsection
+</x-layout>
