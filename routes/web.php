@@ -16,3 +16,9 @@ Route::get('/listings/{listing}',[ListingController::class,'show']);
 
 // Store job form data
 Route::post('/listings',[ListingController::class,'store']);
+
+// Show Edit Form
+Route::get('/listings/{listing}/edit',[ListingController::class,'edit']);
+
+// Update Listing
+Route::put('/listings/{listing}',[ListingController::class,'update']);
