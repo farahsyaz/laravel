@@ -44,9 +44,6 @@
                     <!-- Add more navbar links as needed -->
                 </ul>
                 
-                <!-- Include Search Partial -->
-                @include('partials._search')
-                
                 <!-- Authentication Links -->
                 <ul class="navbar-nav ml-auto">
                     @guest <!-- Show login and signup when user is not logged in -->
