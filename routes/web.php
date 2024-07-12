@@ -15,9 +15,6 @@ Route::get('/listings/create', [ListingController::class, 'create'])->name('list
 // View Single Listing
 Route::get('/listings/{listing}',[ListingController::class,'show']);
 
-// Manage Listings
-Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
-
 // View all Listings
 Route::get('listings/all',[ListingController::class,'all']);
 
@@ -47,3 +44,5 @@ Route::get('/login',[Usercontroller::class,'login'])->middleware('guest');
 
 // Log In User
 Route::post('/users/authenticate',[Usercontroller::class,'authenticate']);
+
+Route::get('/lists/manage', [ListingController::class, 'manage'])->name('listings.manage')->middleware('auth');
