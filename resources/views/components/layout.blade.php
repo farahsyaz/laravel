@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
                      <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Jobs</a>
@@ -66,9 +66,12 @@
                     <li class="nav-item">
                         <span class="nav-link">Welcome, {{ Auth::user()->name }}</span>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
+                     <li class="nav-item">
+        <form action="/logout" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="nav-link btn btn-link" style="display: inline; cursor: pointer;">Logout</button>
+        </form>
+    </li>
                     @endguest
                 </ul>
             </div>
