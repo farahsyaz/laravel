@@ -48,7 +48,7 @@
                     </li>
                     @auth
                 <li class="nav-item">
-                    <a class="nav-link" href="/listings/manage">Manage Listings</a>
+                    <a class="nav-link" href="/lists/manage">Manage Listings</a>
                 </li>
                 @endauth
                 </ul>
