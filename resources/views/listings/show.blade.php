@@ -43,6 +43,7 @@
                     </div>
                 </x-card>
 
+    @auth
     <x-card class="mt-4">
     <div class="card-body">
         <div class="row">
@@ -60,6 +61,7 @@
         </div>
     </div>
 </x-card>
+@endauth
 
 
             </div>

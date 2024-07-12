@@ -40,31 +40,38 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                     <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Jobs</a>
                     </li>
-                    <!-- Add more navbar links as needed -->
+                    @auth
+                <li class="nav-item">
+                    <a class="nav-link" href="/listings/manage">Manage Listings</a>
+                </li>
+                @endauth
                 </ul>
                 
                 <!-- Authentication Links -->
                 <ul class="navbar-nav ml-auto">
                     @guest <!-- Show login and signup when user is not logged in -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Login</a>
+                        <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Signup</a>
+                        <a class="nav-link" href="/register">Register</a>
                     </li>
                     @else <!-- Show user's name and logout when user is logged in -->
                     <li class="nav-item">
                         <span class="nav-link">Welcome, {{ Auth::user()->name }}</span>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
-                    </li>
+                     <li class="nav-item">
+        <form action="/logout" method="POST" style="display: inline;">
+            @csrf
+            <button type="submit" class="nav-link btn btn-link" style="display: inline; cursor: pointer;">Logout</button>
+        </form>
+    </li>
                     @endguest
                 </ul>
             </div>
