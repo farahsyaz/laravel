@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mt-5">
+    <div class="container mt-4 mb-5">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <x-card>
@@ -42,28 +42,6 @@
                         </div>
                     </div>
                 </x-card>
-
-    @auth
-    <x-card class="mt-4">
-    <div class="card-body">
-        <div class="row">
-            <a href="/listings/{{$listing->id}}/edit" class="btn btn-outline-primary mr-2">
-                <i class="fas fa-pencil-alt"></i> Edit Post
-            </a>                            
-                                  
-            <form method="POST" action="/listings/{{$listing->id}}">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-outline-danger">
-                    <i class="fas fa-trash"></i> Delete Post
-                </button>
-            </form>
-        </div>
-    </div>
-</x-card>
-@endauth
-
-
             </div>
         </div>
     </div>
