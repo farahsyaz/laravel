@@ -11,21 +11,14 @@
     <!-- Bootstrap CSS CDN -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
+     <!-- Link CSS file -->
+    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
     <!-- Alpine JS CDN -->
     <script src="//unpkg.com/alpinejs" defer></script>
     <!-- Add this line to your HTML head -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 
-    <style>
-        .hero-section {
-            background-color: #f8f9fa;
-            padding: 100px 0;
-            text-align: center;
-        }
-        .hero-section h1 {
-            font-size: 3rem;
-        }
-    </style>
 </head>
 <body>
     <!-- Navbar with Login, Signup, User Display, and Search -->
@@ -42,9 +35,6 @@
                 <ul class="navbar-nav mr-auto">
                      <li class="nav-item">
                         <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Jobs</a>
                     </li>
                     @auth
                 <li class="nav-item">
