@@ -87,11 +87,6 @@ class ListingController extends Controller
 
     // Mange Listing
     public function manage(){
-        dd('hf');
-        // return view('listings.manage',['listings' => auth()->user()->listings()->get()]);
-    }
-
-    public function all(){
-      return "Manage method called";
+         return view('listings.manage',['listings' => auth()->user()->listings()->get()]);
     }
 }
