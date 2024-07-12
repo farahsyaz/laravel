@@ -1,0 +1,33 @@
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            position: relative;
+        }
+
+        .wrapper {
+            min-height: 100%;
+            margin-bottom: -50px; /* Height of the footer */
+            padding-bottom: 50px; /* Height of the footer */
+        }
+
+        .footer {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 50px; /* Height of the footer */
+            line-height: 50px;
+            background-color: #f8f9fa; /* Example background color */
+        }
+
+        .hero-section {
+            background-color: #f8f9fa;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+        }
