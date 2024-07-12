@@ -47,11 +47,10 @@
                         <a class="nav-link" href="#">Jobs</a>
                     </li>
                     @auth
-                    <li class="nav-item">
-                        <!-- <a class="nav-link" href="/listings/manage">Manage Listing</a> -->
-                        <a href="{{ route('listings.manage') }}">Manage Listings</a>
-                    </li>
-                    @endauth
+                <li class="nav-item">
+                    <a class="nav-link" href="/listings/manage">Manage Listings</a>
+                </li>
+                @endauth
                 </ul>
                 
                 <!-- Authentication Links -->
