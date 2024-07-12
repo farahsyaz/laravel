@@ -18,6 +18,9 @@ Route::get('/listings/{listing}',[ListingController::class,'show']);
 // Manage Listings
 Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
+// View all Listings
+Route::get('listings/all',[ListingController::class,'all']);
+
 // Store job form data
 Route::post('/listings',[ListingController::class,'store'])->middleware('auth.check');
 
