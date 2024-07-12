@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mt-5">
+    <div class="container mt-5 mb-3">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div class="card">
@@ -43,13 +43,12 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="mt-3 text-center">
+                            <div class="mt-3 text-center">
                     Already have an account?
                     <a href="/login" class="text-decoration-none">Login</a>
+                </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
