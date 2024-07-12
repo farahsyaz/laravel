@@ -8,7 +8,7 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <h2 class="card-title">
-                        <a href="/listings/{{ $listing->id }}" class="text-decoration-none text-dark">{{ $listing->title }}</a>
+                        <span class="text-decoration-none text-dark">{{ $listing->title }}</span>
                     </h2>
                     
                     <x-listing-tags :tagsCsv="$listing->tags" />
@@ -17,7 +17,7 @@
                     
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
-                            <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-info-circle"></i> View Details</a>
+                            <a href="/listings/{{ $listing->id }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-info-circle"></i> View Details</a>
                             <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-check-circle"></i> Apply Now</a>
                         </div>
                         
