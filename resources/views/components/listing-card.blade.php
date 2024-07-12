@@ -20,6 +20,9 @@
                             <a href="#" class="btn btn-sm btn-outline-primary"><i class="fas fa-info-circle"></i> View Details</a>
                             <a href="#" class="btn btn-sm btn-outline-secondary"><i class="fas fa-check-circle"></i> Apply Now</a>
                         </div>
+                        
+                    </div>
+                    <div>
                         <small class="text-muted">{{ $listing->created_at->diffForHumans() }}</small>
                     </div>
                 </div>
