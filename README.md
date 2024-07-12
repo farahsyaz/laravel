@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://github.com/lahiruanushka/JobFinderApp-Demo" target="_blank">
-        <img src="public/images/job-work-svgrepo-com.svg" width="400" alt="JobFinderApp Logo">
+        <img src="public/images/job-work-svgrepo-com.svg" width="100" alt="JobFinderApp Logo">
     </a>
 </p>
 
