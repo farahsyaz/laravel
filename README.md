@@ -23,7 +23,7 @@ To set up the project locally, follow these steps:
 1. **Clone the repository:**
 
     ```sh
-    git clone https://github.com/lahiruanushka/JobFinderApp-Demo.git
+    git clone https://github.com/lahiruanushka/laravel-job-posting-app.git
     cd JobFinderApp-Demo
     ```
 
