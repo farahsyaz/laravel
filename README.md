@@ -4,9 +4,9 @@
     </a>
 </p>
 
-# JobFinderApp-Demo
+# Job Posting App
 
-JobFinderApp-Demo is a simple job finding and posting application built using Laravel for educational purposes. This application allows users to post job listings and search for available job opportunities.
+Job Posting App is a straightforward job finding and posting application built with Laravel 11. Created for educational purposes and based on a YouTube tutorial, this app allows users to post job listings and search for job opportunities.
 
 ## Features
 
