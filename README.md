@@ -24,7 +24,7 @@ To set up the project locally, follow these steps:
 
     ```sh
     git clone https://github.com/lahiruanushka/laravel-job-posting-app.git
-    cd JobFinderApp-Demo
+    cd laravel-job-posting-app
     ```
 
 2. **Install dependencies:**
