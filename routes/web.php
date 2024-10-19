@@ -1,48 +1,35 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Models\Listing;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
-// All Listins
-Route::get('/', [ListingController::class,'index']);
+// Public Routes
+Route::get('/', [ListingController::class, 'index']);
+Route::get('listings/all', [ListingController::class, 'all']);
 
-// Show Create Job form
-Route::get('/listings/create', [ListingController::class, 'create'])->name('listings.create')->middleware('auth.check');
+// Authentication Routes
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+Route::post('/users', [UserController::class, 'store']);
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
 
-// View Single Listing
-Route::get('/listings/{listing}',[ListingController::class,'show']);
+// Authenticated User Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/listings/create', [ListingController::class, 'create'])->name('listings.create');
+    Route::post('/listings', [ListingController::class, 'store']);
+    Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+    Route::put('/listings/{listing}', [ListingController::class, 'update']);
+    Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+    Route::get('/lists/manage', [ListingController::class, 'manage'])->name('listings.manage');
+});
 
-// View all Listings
-Route::get('listings/all',[ListingController::class,'all']);
 
-// Store job form data
-Route::post('/listings',[ListingController::class,'store'])->middleware('auth.check');
+Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
-// Show Edit Form
-Route::get('/listings/{listing}/edit',[ListingController::class,'edit'])->middleware('auth.check');
-
-// Update Listing
-Route::put('/listings/{listing}',[ListingController::class,'update'])->middleware('auth.check');
-
-// Delete Listing
-Route::delete('/listings/{listing}',[ListingController::class,'destroy'])->middleware('auth.check');
-
-// Show register form
-Route::get('/register',[Usercontroller::class,'create'])->middleware('guest');
-
-// Register new user
-Route::post('/users',[Usercontroller::class,'store']);
-
-// Log user out
-Route::post('/logout',[Usercontroller::class,'logout'])->middleware('auth.check');
-
-// Show Login Form
-Route::get('/login',[Usercontroller::class,'login'])->middleware('guest');
-
-// Log In User
-Route::post('/users/authenticate',[Usercontroller::class,'authenticate']);
-
-Route::get('/lists/manage', [ListingController::class, 'manage'])->name('listings.manage')->middleware('auth');
+// Admin Routes
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
