@@ -10,94 +10,114 @@ use Illuminate\Validation\Rule;
 class ListingController extends Controller
 {
     //show all listings
-   public function index(){
-    return view('listings.index', [
-        'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
-    ]);
+    public function index()
+    {
+        return view('listings.index', [
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
+        ]);
     }
 
     //show single listins
-    public function show(Listing $listing){
-        return view('listings.show',[
-        'listing' => $listing
-    ]);
+    public function show(Listing $listing)
+    {
+        return view('listings.show', [
+            'listing' => $listing
+        ]);
     }
 
     //create job post
-    public function create(){
+    public function create()
+    {
         return view('listings.create');
     }
 
     //store job data
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
-        $formFields =$request->validate([
+        $formFields = $request->validate([
             'title' => 'required',
-            'company' => ['required',Rule::unique('listings','company')],
+            'company' => ['required', Rule::unique('listings', 'company')],
             'location' => 'required',
             'website' => 'required',
-            'email' => ['required','email'],
+            'email' => ['required', 'email'],
             'tags' => 'required',
             'description' => 'required'
         ]);
 
-        if($request->hasFile('logo')){
-            $formFields['logo'] = $request->file('logo')->store('logos','public');
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
         $formFields['user_id'] = auth()->id();
 
         Listing::create($formFields);
-        
-        return redirect('/')->with('message','Listing created successfully');
+
+        return redirect('/')->with('message', 'Listing created successfully');
     }
 
     // Show Edit form
-    public function edit(Listing $listing){
-    return view('listings.edit', compact('listing'));
+    public function edit(Listing $listing)
+    {
+        return view('listings.edit', compact('listing'));
     }
 
     // Update Listing Data
-     public function update(Request $request, Listing $listing){
-
-        // Make sure logged in user is owner
-        if($listing->user_id != auth()->id()){
-            abort(403,'Unauthorized Action');
+    public function update(Request $request, Listing $listing)
+    {
+        // Allow update if the user is the owner or an admin
+        if ($listing->user_id != auth()->id() && !auth()->user()->is_admin) {
+            abort(403, 'Unauthorized Action');
         }
 
-        $formFields =$request->validate([
+        $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
             'location' => 'required',
             'website' => 'required',
-            'email' => ['required','email'],
+            'email' => ['required', 'email'],
             'tags' => 'required',
             'description' => 'required'
         ]);
 
-        if($request->hasFile('logo')){
-            $formFields['logo'] = $request->file('logo')->store('logos','public');
+        // Handle logo upload if present
+        if ($request->hasFile('logo')) {
+            $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        // Update the listing with validated fields
         $listing->update($formFields);
-        
-        return back()->with('message','Listing updated successfully');
+
+        return back()->with('message', 'Listing updated successfully');
     }
 
-    // Delete Listing
-    public function destroy(Listing $listing){
 
-        // Make sure logged in user is owner
-        if($listing->user_id != auth()->id()){
-            abort(403,'Unauthorized Action');
+    // Delete Listing
+    public function destroy(Listing $listing)
+    {
+        // Allow deletion if the user is the owner or an admin
+        if ($listing->user_id != auth()->id() && !auth()->user()->is_admin) {
+            abort(403, 'Unauthorized Action');
         }
 
         $listing->delete();
-        return redirect('/')->with('message','Listing deleted successfully');
+        return redirect()->route('listings.manage')->with('message', 'Listing deleted successfully');
     }
 
+
+
     // Mange Listing
-    public function manage(){
-         return view('listings.manage',['listings' => auth()->user()->listings()->get()]);
+    public function manage()
+    {
+        // Check if the user is an admin
+        if (auth()->user()->is_admin) {
+            // Get all listings if the user is an admin
+            $listings = Listing::all();
+        } else {
+            // Get only the listings belonging to the user if not an admin
+            $listings = auth()->user()->listings()->get();
+        }
+
+        return view('listings.manage', ['listings' => $listings]);
     }
 }

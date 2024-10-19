@@ -32,4 +32,5 @@ Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('li
 // Admin Routes
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
 });
