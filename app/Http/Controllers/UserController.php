@@ -97,4 +97,39 @@ class UserController extends Controller
             'invalid' => 'Invalid credentials',
         ])->withInput();
     }
+
+    public function edit()
+    {
+        return view('users.edit', ['user' => auth()->user()]);
+    }
+
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        $formFields = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
+            'password' => 'nullable|string|min:6|confirmed',
+        ]);
+
+        if ($request->filled('password')) {
+            $formFields['password'] = Hash::make($formFields['password']);
+        } else {
+            unset($formFields['password']);
+        }
+
+        $user->update($formFields);
+
+        return redirect()->route('user.profile')->with('message', 'Profile updated successfully');
+    }
+
+    public function destroy()
+    {
+        $user = auth()->user();
+        auth()->logout();
+        $user->delete();
+
+        return redirect('/')->with('message', 'Your account has been deleted');
+    }
 }

@@ -24,8 +24,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/listings/{listing}', [ListingController::class, 'update']);
     Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
     Route::get('/lists/manage', [ListingController::class, 'manage'])->name('listings.manage');
+    
+    // New user routes
+    Route::get('/profile', [UserController::class, 'edit'])->name('user.profile');
+    Route::put('/profile', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/profile', [UserController::class, 'destroy'])->name('user.destroy');
 });
-
 
 Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('listing', '[0-9]+');
 
@@ -33,4 +37,8 @@ Route::get('/listings/{listing}', [ListingController::class, 'show'])->where('li
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/users', [AdminController::class, 'users'])->name('admin.users');
+    Route::get('/admin/users/{user}', [AdminController::class, 'show'])->name('admin.users.show');
+    Route::get('/admin/users/{user}/edit', [AdminController::class, 'edit'])->name('admin.users.edit');
+    Route::put('/admin/users/{user}', [AdminController::class, 'update'])->name('admin.users.update');
+    Route::delete('/admin/users/{user}', [AdminController::class, 'destroy'])->name('admin.users.destroy');
 });
