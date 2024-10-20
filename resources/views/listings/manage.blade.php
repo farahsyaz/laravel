@@ -24,7 +24,9 @@
                                 <th>Title</th>
                                 <th>Company</th>
                                 <th>Location</th>
-                                <th>Posted By</th>
+                                @if (auth()->user() && auth()->user()->isAdmin())
+                                    <th>Posted By</th>
+                                @endif
                                 <th>Created</th>
                                 <th>Actions</th>
                             </tr>
@@ -35,29 +37,23 @@
                                     <td>{{ $listing->title }}</td>
                                     <td>{{ $listing->company }}</td>
                                     <td>{{ $listing->location }}</td>
-                                    <td>{{ $listing->user->name }}</td>
+                                    @if (auth()->user() && auth()->user()->isAdmin())
+                                        <td>{{ $listing->user->name }}</td>
+                                    @endif
                                     <td>{{ $listing->created_at->format('M d, Y') }}</td>
                                     <td>
                                         <div class="d-flex">
-                                            <a href="/listings/{{ $listing->id }}" class="btn btn-sm btn-success mr-2">
+                                            <a href="/listings/{{ $listing->id }}" class="btn btn-sm btn-success me-2">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
                                             <a href="/listings/{{ $listing->id }}/edit"
-                                                class="btn btn-sm btn-warning mr-2">
+                                                class="btn btn-sm btn-warning me-2">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form method="POST" action="/listings/{{ $listing->id }}"
-                                                class="d-inline-block">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this listing?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <x-confirm-delete :action="'/listings/' . $listing->id"
+                                                message="Are you sure you want to delete this listing?" />
                                         </div>
                                     </td>
-
                                 </tr>
                             @endforeach
                         </tbody>

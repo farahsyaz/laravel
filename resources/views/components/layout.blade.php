@@ -9,99 +9,114 @@
     <title>JOB Finder</title>
     <link rel="icon" type="image/png" href="{{ asset('images/job-work-svgrepo-com.svg') }}">
 
-    <!-- Bootstrap CSS CDN -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap 5 CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Link CSS file -->
-    <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <!-- Alpine JS CDN -->
     <script src="//unpkg.com/alpinejs" defer></script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-        integrity="sha512-..." crossorigin="anonymous" />
+    <!-- Link to the custom CSS file -->
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
 </head>
 
-<body>
-    <!-- Navbar with Login, Signup, User Display, and Search -->
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="/">
-                <img src="{{ asset('images/job-work-svgrepo-com.svg') }}" alt="Job Finder Logo" height="30">
-                JOB Finder
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/"><i class="fas fa-home mr-1"></i>Home</a>
-                    </li>
-                    @auth
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="/">
+                    <img src="{{ asset('images/job-work-svgrepo-com.svg') }}" alt="Job Finder Logo" height="30"
+                        class="me-2">
+                    <span>JOB Finder</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="/lists/manage"><i class="fas fa-tasks mr-1"></i>Manage Listings</a>
+                            <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Home</a>
                         </li>
-                        @if (Auth::user()->is_admin)
+                        @auth
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.dashboard') }}"><i
-                                        class="fas fa-tachometer-alt mr-1"></i>Admin Dashboard</a>
+                                <a class="nav-link" href="/lists/manage"><i class="fas fa-tasks me-1"></i>Manage
+                                    Listings</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('admin.users') }}"><i
-                                        class="fas fa-users mr-1"></i>Manage Users</a>
-                            </li>
-                        @endif
-                    @endauth
-                </ul>
+                            @if (Auth::user()->is_admin)
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.dashboard') }}"><i
+                                            class="fas fa-tachometer-alt me-1"></i>Admin Dashboard</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.users') }}"><i
+                                            class="fas fa-users me-1"></i>Manage Users</a>
+                                </li>
+                            @endif
+                        @endauth
+                    </ul>
 
-                <!-- Authentication Links -->
-                <ul class="navbar-nav ml-auto">
-                    @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login"><i class="fas fa-sign-in-alt mr-1"></i>Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/register"><i class="fas fa-user-plus mr-1"></i>Register</a>
-                        </li>
-                    @else
-                        <li class="nav-item">
-                            <span class="nav-link"><i class="fas fa-user mr-1"></i>Welcome, {{ Auth::user()->name }}</span>
-                        </li>
-                        <li class="nav-item">
-                            <form action="/logout" method="POST" style="display: inline;">
-                                @csrf
-                                <button type="submit" class="nav-link btn btn-link"
-                                    style="display: inline; cursor: pointer;"><i
-                                        class="fas fa-sign-out-alt mr-1"></i>Logout</button>
-                            </form>
-                        </li>
-                    @endguest
-                </ul>
+                    <!-- Authentication Links -->
+                    <ul class="navbar-nav">
+                        @guest
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-outline-primary me-2" href="/login"><i
+                                        class="fas fa-sign-in-alt me-1"></i>Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link btn btn-primary" href="/register"><i
+                                        class="fas fa-user-plus me-1"></i>Register</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <span class="nav-link"><i class="fas fa-user me-1"></i>Welcome,
+                                    {{ Auth::user()->name }}</span>
+                            </li>
+                            <li class="nav-item">
+                                <form action="/logout" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="nav-link btn btn-link text-danger">
+                                        <i class="fas fa-sign-out-alt me-1"></i>Logout
+                                    </button>
+                                </form>
+                            </li>
+                        @endguest
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
 
     <!-- Main Content Area -->
-    <main class="container mt-4">
+    <main class="container my-4 flex-grow-1">
         <!-- Flash message -->
         <x-flash-message />
         {{ $slot }}
     </main>
 
     <!-- Footer -->
-    <footer class="text-muted py-4 bg-light">
+    <footer class="py-4 mt-auto">
         <div class="container">
-            <p class="mb-1">© <?php echo date("Y"); ?> JOB Finder. All rights reserved.</p>
+            <div class="row align-items-center">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="mb-0">&copy; <?php echo date('Y'); ?> JOB Finder. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end mt-3 mt-md-0">
+                    <a href="#" class="text-muted me-3"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-muted me-3"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-muted me-3"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap JS, Popper.js, and jQuery -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap 5 JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

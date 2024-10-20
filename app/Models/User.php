@@ -46,8 +46,14 @@ class User extends Authenticatable
         ];
     }
 
-   // Relationship with Listings
-    public function listings(){
+    // Relationship with Listings
+    public function listings()
+    {
         return $this->hasMany(Listing::class, 'user_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->is_admin == 1;
     }
 }

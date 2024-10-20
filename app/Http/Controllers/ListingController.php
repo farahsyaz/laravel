@@ -88,7 +88,7 @@ class ListingController extends Controller
         // Update the listing with validated fields
         $listing->update($formFields);
 
-        return back()->with('message', 'Listing updated successfully');
+        return redirect('/')->with('message', 'Listing updated successfully');
     }
 
 
