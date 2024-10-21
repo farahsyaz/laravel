@@ -104,20 +104,19 @@ class ListingController extends Controller
         return redirect()->route('listings.manage')->with('message', 'Listing deleted successfully');
     }
 
-
-
     // Mange Listing
     public function manage()
     {
         // Check if the user is an admin
         if (auth()->user()->is_admin) {
-            // Get all listings if the user is an admin
-            $listings = Listing::all();
+            // Get paginated listings 
+            $listings = Listing::paginate(10); 
         } else {
-            // Get only the listings belonging to the user if not an admin
-            $listings = auth()->user()->listings()->get();
+            // Get only the paginated listings belonging to the user if not an admin
+            $listings = auth()->user()->listings()->paginate(10);
         }
-
+    
         return view('listings.manage', ['listings' => $listings]);
     }
+    
 }

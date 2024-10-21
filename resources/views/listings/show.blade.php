@@ -6,7 +6,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/no-image.jfif') }}" class="card-img img-fluid rounded" alt="Listing Image">
+                                <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/hiring.jfif') }}" class="card-img img-fluid rounded" alt="Listing Image">
                             </div>
                             <div class="col-md-8">
                                 <h2 class="card-title mb-3">{{ $listing->title }}</h2>

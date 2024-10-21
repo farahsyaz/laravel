@@ -18,7 +18,7 @@ class UserController extends Controller
      */
     public function create(): View
     {
-        return view('users.register');
+        return view('user.register');
     }
 
     /**
@@ -70,7 +70,7 @@ class UserController extends Controller
      */
     public function login(): View
     {
-        return view('users.login');
+        return view('user.login');
     }
 
     /**

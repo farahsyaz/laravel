@@ -72,17 +72,29 @@
                                         class="fas fa-user-plus me-1"></i>Register</a>
                             </li>
                         @else
-                            <li class="nav-item">
-                                <span class="nav-link"><i class="fas fa-user me-1"></i>Welcome,
-                                    {{ Auth::user()->name }}</span>
-                            </li>
-                            <li class="nav-item">
-                                <form action="/logout" method="POST" class="d-inline">
-                                    @csrf
-                                    <button type="submit" class="nav-link btn btn-link text-danger">
-                                        <i class="fas fa-sign-out-alt me-1"></i>Logout
-                                    </button>
-                                </form>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fas fa-user me-1"></i>Welcome, {{ Auth::user()->name }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <a class="dropdown-item" href="/profile">
+                                            <i class="fas fa-user-circle me-1"></i>Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li>
+                                        <form action="/logout" method="POST" class="dropdown-item p-0">
+                                            @csrf
+                                            <button type="submit" class="btn btn-link nav-link text-start w-100">
+                                                <i class="fas fa-sign-out-alt me-1"></i>Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </li>
                         @endguest
                     </ul>

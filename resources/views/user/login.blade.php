@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 @if(session('error'))
-    <div class="alert alert-danger">
-        {{ session('error') }}
-    </div>
-@endif
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                @endif
 
                 <div class="card">
                     <div class="card-header text-center">
@@ -24,7 +24,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" >
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                                 @error('email')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
@@ -32,7 +32,7 @@
 
                             <div class="form-group mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="password" value="{{ old('password') }}" >
+                                <input type="password" class="form-control" id="password" name="password" required>
                                 @error('password')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror

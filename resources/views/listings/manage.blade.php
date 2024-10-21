@@ -42,12 +42,11 @@
                                     @endif
                                     <td>{{ $listing->created_at->format('M d, Y') }}</td>
                                     <td>
-                                        <div class="d-flex">
-                                            <a href="/listings/{{ $listing->id }}" class="btn btn-sm btn-success me-2">
+                                        <div class="btn-group" role="group">
+                                            <a href="/listings/{{ $listing->id }}" class="btn btn-sm btn-primary">
                                                 <i class="fas fa-info-circle"></i>
                                             </a>
-                                            <a href="/listings/{{ $listing->id }}/edit"
-                                                class="btn btn-sm btn-warning me-2">
+                                            <a href="/listings/{{ $listing->id }}/edit" class="btn btn-sm btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             <x-confirm-delete :action="'/listings/' . $listing->id"
@@ -58,6 +57,10 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <!-- Pagination Links -->
+                    <div class="mt-6 p-4">
+                        {{ $listings->links('vendor.pagination.bootstrap-5') }}
+                    </div>
                 @endif
             </div>
         </x-card>

@@ -20,8 +20,8 @@ class AdminController extends Controller
 
     public function users()
     {
-        $users = User::paginate(15);
-        return view('admin.users', compact('users'));
+        $users = User::paginate(10);
+        return view('admin.users.manage', compact('users'));
     }
 
     public function show(User $user)

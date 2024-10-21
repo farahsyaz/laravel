@@ -2,7 +2,7 @@
 
 <div class="job-card">
     <div class="job-card__image">
-        <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/no-image.jfif') }}" alt="{{ $listing->company }} Logo">
+        <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/hiring.jfif') }}" alt="{{ $listing->company }} Logo">
     </div>
     <div class="job-card__content">
         <h2 class="job-card__title">{{ $listing->title }}</h2>
