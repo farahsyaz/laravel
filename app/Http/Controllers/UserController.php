@@ -44,7 +44,7 @@ class UserController extends Controller
         // Log the user in
         auth()->login($user);
 
-        return redirect('/')->with('message', 'User created and logged in');
+        return redirect('/')->with('message', 'Account has been created and logged in');
     }
 
     /**
@@ -100,7 +100,7 @@ class UserController extends Controller
 
     public function edit()
     {
-        return view('users.edit', ['user' => auth()->user()]);
+        return view('user.edit', ['user' => auth()->user()]);
     }
 
     public function update(Request $request)

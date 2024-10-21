@@ -45,27 +45,20 @@
                                                 class="btn btn-sm btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <form action="{{ route('admin.users.destroy', $user) }}" method="POST"
-                                                class="d-inline">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Are you sure you want to delete this user?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
+                                            <x-confirm-delete :action="'/admin/users/' . $user->id"
+                                                message="Are you sure you want to delete this listing?" />
                                         </div>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
-                </table>
-                <!-- Pagination Links -->
-                <div class="mt-6 p-4">
-                    {{ $users->links('vendor.pagination.bootstrap-5') }}
-                </div>
-            @endif
-        </div>
-    </x-card>
-</div>
+                    </table>
+                    <!-- Pagination Links -->
+                    <div class="mt-6 p-4">
+                        {{ $users->links('vendor.pagination.bootstrap-5') }}
+                    </div>
+                @endif
+            </div>
+        </x-card>
+    </div>
 </x-layout>
