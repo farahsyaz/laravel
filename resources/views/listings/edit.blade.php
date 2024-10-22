@@ -22,7 +22,7 @@
                             <div class="mb-4">
                                 <label for="logo" class="form-label">Company Logo</label>
                                 <div class="mb-2">
-                                    <img src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('/images/no-image.jfif') }}"
+                                    <img src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('/images/hiring.jfif') }}"
                                         class="img-fluid img-thumbnail" alt="Company Logo"
                                         style="max-width: 200px; max-height: 200px;">
                                 </div>

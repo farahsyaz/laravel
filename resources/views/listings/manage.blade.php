@@ -11,6 +11,19 @@
                             Job Listing</a>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-6 mb-3">
+                        <form action="{{ route('listings.manage') }}" method="GET" class="mt-3">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="search"
+                                    placeholder="Search by title, company, or location" value="{{ request('search') }}">
+                                <button class="btn btn-secondary" type="submit">
+                                    <i class="fas fa-search"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 @if ($listings->isEmpty())

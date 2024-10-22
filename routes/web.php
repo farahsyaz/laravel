@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Route;
 
 // Public Routes
 Route::get('/', [ListingController::class, 'index']);
-Route::get('listings/all', [ListingController::class, 'all']);
 
 // Authentication Routes
 Route::get('/register', [UserController::class, 'create'])->middleware('guest');

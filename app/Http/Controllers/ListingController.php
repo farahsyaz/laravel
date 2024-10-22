@@ -12,8 +12,11 @@ class ListingController extends Controller
     //show all listings
     public function index()
     {
+        $search = request('search'); // Get the search query
+
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6)
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(6), // This line remains as is.
+            'search' => $search // Pass the search term to the view
         ]);
     }
 
@@ -107,16 +110,28 @@ class ListingController extends Controller
     // Mange Listing
     public function manage()
     {
+        $search = request('search'); // Get the search query
+
         // Check if the user is an admin
         if (auth()->user()->is_admin) {
-            // Get paginated listings 
-            $listings = Listing::paginate(10); 
+            // Get paginated listings with search functionality
+            $listings = Listing::when($search, function ($query) use ($search) {
+                return $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('company', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%');
+            })->paginate(10);
         } else {
             // Get only the paginated listings belonging to the user if not an admin
-            $listings = auth()->user()->listings()->paginate(10);
+            $listings = auth()->user()->listings()->when($search, function ($query) use ($search) {
+                return $query->where('title', 'like', '%' . $search . '%')
+                    ->orWhere('company', 'like', '%' . $search . '%')
+                    ->orWhere('location', 'like', '%' . $search . '%');
+            })->paginate(10);
         }
-    
-        return view('listings.manage', ['listings' => $listings]);
+
+        return view('listings.manage', [
+            'listings' => $listings,
+            'search' => $search // Pass the search term to the view
+        ]);
     }
-    
 }
