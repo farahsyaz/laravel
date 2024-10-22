@@ -6,6 +6,12 @@
                     <div class="col-6">
                         <h3 class="mb-4"><i class="fas fa-tasks mr-2"></i>Manage Users</h3>
                     </div>
+                    <div class="col-6 text-end">
+                        <form action="{{ route('admin.users') }}" method="GET" class="d-flex">
+                            <input type="text" name="search" class="form-control" placeholder="Search users" value="{{ request('search') }}">
+                            <button type="submit" class="btn btn-primary ms-2">Search</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="card-body">
@@ -46,7 +52,7 @@
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
                                             <x-confirm-delete :action="'/admin/users/' . $user->id"
-                                                message="Are you sure you want to delete this listing?" />
+                                                message="Are you sure you want to delete this user?" />
                                         </div>
                                     </td>
                                 </tr>
