@@ -2,6 +2,7 @@
 
 @php
     $tags = explode(',', $tagsCsv);
+    // dd($tagsCsv);
 @endphp
 
 <div class="tags">

@@ -1,8 +1,132 @@
 @props(['listing'])
 
+<style>
+    .job-card {
+        display: flex;
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        margin-bottom: 20px;
+    }
+
+    .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .job-card__image {
+        flex: 0 0 200px;
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .job-card__image img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .job-card__content {
+        flex: 1;
+        padding: 20px;
+    }
+
+    .job-card__title {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .job-card__company {
+        font-size: 1rem;
+        color: #666;
+        margin-bottom: 15px;
+    }
+
+    .job-card__tags {
+        margin-bottom: 15px;
+    }
+
+    .job-card__actions {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+    }
+
+    .job-card__date {
+        font-size: 0.875rem;
+        color: #888;
+        margin-bottom: 0;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+
+    .tag {
+        background-color: #e9ecef;
+        color: #495057;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.875rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+    }
+
+    .tag:hover {
+        background-color: #dee2e6;
+        color: #212529;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 4px;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-primary {
+        background-color: #4a90e2;
+        border-color: #4a90e2;
+        color: #ffffff;
+    }
+
+    .btn-primary:hover {
+        background-color: #3a7bc8;
+        border-color: #3a7bc8;
+    }
+
+    .btn-outline-primary {
+        color: #4a90e2;
+        border-color: #4a90e2;
+    }
+
+    .btn-outline-primary:hover {
+        background-color: #4a90e2;
+        color: #ffffff;
+    }
+
+    @media (max-width: 768px) {
+        .job-card {
+            flex-direction: column;
+        }
+
+        .job-card__image {
+            height: 200px;
+        }
+    }
+</style>
+
 <div class="job-card">
     <div class="job-card__image">
-        <img src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/hiring.jfif') }}" alt="{{ $listing->company }} Logo">
+        <img src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('/images/hiring.jfif') }}"
+            alt="{{ $listing->company }} Logo">
     </div>
     <div class="job-card__content">
         <h2 class="job-card__title">{{ $listing->title }}</h2>

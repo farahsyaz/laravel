@@ -8,7 +8,8 @@
                     </div>
                     <div class="col-6 text-end">
                         <form action="{{ route('admin.users') }}" method="GET" class="d-flex">
-                            <input type="text" name="search" class="form-control" placeholder="Search users" value="{{ request('search') }}">
+                            <input type="text" name="search" class="form-control" placeholder="Search users"
+                                value="{{ request('search') }}">
                             <button type="submit" class="btn btn-primary ms-2">Search</button>
                         </form>
                     </div>
@@ -33,7 +34,13 @@
                         <tbody>
                             @foreach ($users as $user)
                                 <tr>
-                                    <td>{{ $user->name }}</td>
+                                    <td>
+                                        @if ($user->id == auth()->id())
+                                            {{ $user->name }} (You)
+                                        @else
+                                            {{ $user->name }}
+                                        @endif
+                                    </td>
                                     <td>{{ $user->email }}</td>
                                     <td>
                                         <span class="badge bg-{{ $user->is_admin ? 'success' : 'info' }}">
@@ -51,8 +58,9 @@
                                                 class="btn btn-sm btn-warning">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <x-confirm-delete :action="'/admin/users/' . $user->id"
-                                                message="Are you sure you want to delete this user?" />
+                                            <x-confirm-delete :action="'/admin/users/' . $user->id" :message="$user->id == auth()->id()
+                                                ? 'Are you sure you want to delete your own account?'
+                                                : 'Are you sure you want to delete this user?'" />
                                         </div>
                                     </td>
                                 </tr>
