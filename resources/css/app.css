@@ -34,3 +34,17 @@ body {
     background-color: #4a90e2;
     color: #ffffff;
 }
+
+.alert {
+    position: relative;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    margin: 1rem;
+}
+
+.alert-success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}

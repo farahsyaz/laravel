@@ -295,20 +295,21 @@
 @endsection
 
 @push('scripts')
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
         // Form submission handling
         document.getElementById('editJobListingForm').addEventListener('submit', function(e) {
-            var updateButton = document.getElementById('updateButton');
-            var updateText = document.getElementById('updateText');
-            var updateSpinner = document.getElementById('updateSpinner');
+            var submitButton = document.getElementById('submitButton');
+            var submitText = document.getElementById('submitText');
+            var loadingSpinner = document.getElementById('loadingSpinner');
 
-            updateButton.disabled = true;
-            updateText.textContent = 'Updating...';
-            updateSpinner.classList.remove('d-none');
+            submitButton.disabled = true;
+            submitText.textContent = 'Updating...';
+            loadingSpinner.classList.remove('d-none');
         });
 
         // File input preview
-        document.getElementById('logo').addEventListener('change', function(e) {
+        document.getElementsByName('logo')[0].addEventListener('change', function(e) {
             const fileName = e.target.files[0]?.name;
             if (fileName) {
                 const label = this.nextElementSibling;
@@ -317,5 +318,7 @@
                 }
             }
         });
-    </script>
+    });
+</script>
 @endpush
+

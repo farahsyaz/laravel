@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
@@ -79,7 +80,7 @@
                                     <a class="dropdown-item" href="{{ route('user.profile') }}">
                                         {{ __('Profile') }}
                                     </a>
-                                    
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -98,6 +99,13 @@
         </nav>
 
         <main class="py-4">
+            @if (session('message'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('message') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             @yield('content')
         </main>
 
@@ -120,6 +128,21 @@
             </div>
         </footer>
     </div>
+    @push('scripts')
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const alert = document.querySelector('.alert');
+                if (alert) {
+                    setTimeout(() => {
+                        alert.classList.add('fade');
+                        setTimeout(() => alert.remove(), 500);
+                    }, 3000); // 3 seconds before dismissing
+                }
+            });
+        </script>
+    @endpush
+
+    @stack('scripts')
 </body>
 
 </html>

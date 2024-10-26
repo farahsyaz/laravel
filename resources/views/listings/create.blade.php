@@ -73,6 +73,27 @@
             color: white;
         }
 
+        /* File name display */
+        .file-name {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+            word-break: break-all;
+        }
+
+        /* Disabled button state */
+        .btn-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Spinner styling */
+        .spinner-border {
+            width: 1rem;
+            height: 1rem;
+            border-width: 0.15em;
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 768px) {
             .content-section {
@@ -279,33 +300,60 @@
 
 @push('scripts')
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener('DOMContentLoaded', function() {
             // Form handling
-            const jobForm = document.getElementById("jobListingForm");
-            if (jobForm) {
-                jobForm.addEventListener("submit", function(e) {
-                    const submitButton = document.getElementById("submitButton");
-                    const submitText = document.getElementById("submitText");
-                    const loadingSpinner = document.getElementById("loadingSpinner");
+            const jobForm = document.getElementById('jobListingForm');
 
+            if (jobForm) {
+                // Get elements after confirming form exists
+                const submitButton = document.getElementById('submitButton');
+                const submitText = document.getElementById('submitText');
+                const loadingSpinner = document.getElementById('loadingSpinner');
+
+                jobForm.addEventListener('submit', function(event) {
+                    // Check if all required elements exist
                     if (submitButton && submitText && loadingSpinner) {
-                        submitButton.disabled = true;
-                        submitText.textContent = "Posting Job...";
-                        loadingSpinner.classList.remove("d-none");
+                        try {
+                            // Disable the button
+                            submitButton.disabled = true;
+                            submitButton.style.opacity = '0.7';
+                            submitButton.style.cursor = 'not-allowed';
+
+                            // Update text and show spinner
+                            submitText.textContent = 'Posting Job...';
+                            loadingSpinner.classList.remove('d-none');
+                        } catch (error) {
+                            console.error('Error in form submission:', error);
+                        }
                     }
                 });
             }
 
             // File input handling
-            const logoInput = document.getElementById("logo");
+            const logoInput = document.querySelector('input[name="logo"]');
             if (logoInput) {
-                logoInput.addEventListener("change", function(e) {
-                    const fileName = e.target.files[0]?.name;
-                    if (fileName) {
-                        const label = this.nextElementSibling;
-                        if (label) {
-                            label.textContent = fileName;
+                logoInput.addEventListener('change', function(event) {
+                    try {
+                        const file = event.target.files[0];
+                        if (file) {
+                            // Find the parent logo-upload div
+                            const uploadDiv = this.closest('.logo-upload');
+                            if (uploadDiv) {
+                                // Remove existing filename display if any
+                                const existingFileName = uploadDiv.querySelector('.file-name');
+                                if (existingFileName) {
+                                    existingFileName.remove();
+                                }
+
+                                // Create and append new filename display
+                                const fileNameDisplay = document.createElement('div');
+                                fileNameDisplay.className = 'file-name mt-2 small text-muted';
+                                fileNameDisplay.textContent = `Selected file: ${file.name}`;
+                                uploadDiv.appendChild(fileNameDisplay);
+                            }
                         }
+                    } catch (error) {
+                        console.error('Error in file input handling:', error);
                     }
                 });
             }
