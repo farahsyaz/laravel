@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.app')
+
+@section('content')
     <div class="container-fluid mt-4">
         <div class="row align-items-center mb-4">
             <div class="col">
@@ -40,4 +42,4 @@
         </div>
 
     </div>
-</x-layout>
+@endsection

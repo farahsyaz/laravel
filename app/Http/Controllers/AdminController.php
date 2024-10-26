@@ -31,27 +31,27 @@ class AdminController extends Controller
                 ->orWhere('email', 'like', '%' . $search . '%');
         })->paginate(10);
 
-        return view('admin.users.manage', compact('users', 'search'));
+        return view('users.manage', compact('users', 'search'));
     }
 
 
     // Show user details
     public function show(User $user)
     {
-        return view('admin.users.show', ['user' => $user]);
+        return view('users.show', ['user' => $user]);
     }
 
     // Manage listings with user information
     public function listings()
     {
         $listings = Listing::with('user')->paginate(15);
-        return view('admin.listings', compact('listings'));
+        return view('listings.manage', compact('listings'));
     }
 
     // Show edit form for user
     public function edit(User $user)
     {
-        return view('admin.users.edit', ['user' => $user]);
+        return view('users.edit', ['user' => $user]);
     }
 
     // Update user information

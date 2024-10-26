@@ -1,0 +1,24 @@
+footer {
+  background-color: white;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+footer .social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--surface);
+  color: var(--secondary);
+  transition: all 0.2s ease;
+  margin-left: 0.5rem;
+  text-decoration: none;
+}
+
+footer .social-link:hover {
+  background-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}

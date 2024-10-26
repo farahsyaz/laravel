@@ -1,90 +1,94 @@
-<x-layout>
+@extends('layouts.app')
+
+@push('styles')
     <style>
         .profile-container {
             min-height: 80vh;
             padding: 3rem 0;
             background-color: #f8fafc;
         }
-        
+
         .profile-card {
             border: none;
             border-radius: 1rem;
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
             overflow: hidden;
         }
-        
+
         .profile-header {
             background: linear-gradient(to right, #2563eb, #3b82f6);
             padding: 1.5rem;
             border-bottom: none;
         }
-        
+
         .form-control {
             border-radius: 0.5rem;
             padding: 0.75rem 1rem;
             transition: all 0.2s ease;
         }
-        
+
         .form-control:focus {
             border-color: #3b82f6;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
-        
+
         .input-group-text {
             border-top-left-radius: 0.5rem;
             border-bottom-left-radius: 0.5rem;
         }
-        
+
         .btn {
             padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 500;
             transition: all 0.2s ease;
         }
-        
+
         .btn:hover {
             transform: translateY(-1px);
         }
-        
+
         .danger-zone {
             background-color: #fff1f2;
             border-top: 1px solid #fecdd3;
             padding: 2rem;
         }
-        
+
         .danger-zone-title {
             color: #be123c;
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: 1rem;
         }
-        
+
         .delete-btn {
             background-color: #be123c;
             border-color: #be123c;
         }
-        
+
         .delete-btn:hover {
             background-color: #9f1239;
             border-color: #9f1239;
         }
-        
+
         .modal-content {
             border-radius: 1rem;
             border: none;
         }
-        
+
         .modal-header {
             border-bottom: 1px solid #e5e7eb;
             padding: 1.5rem;
         }
-        
+
         .modal-footer {
             border-top: 1px solid #e5e7eb;
             padding: 1.5rem;
         }
     </style>
+@endpush
 
+@section('content')
     <div class="profile-container">
         <div class="container">
             <div class="row justify-content-center">
@@ -108,12 +112,9 @@
                                         <span class="input-group-text border-0 bg-light">
                                             <i class="fas fa-user text-muted"></i>
                                         </span>
-                                        <input type="text" 
-                                               class="form-control border-0 bg-light @error('name') is-invalid @enderror"
-                                               id="name" 
-                                               name="name" 
-                                               value="{{ old('name', $user->name) }}" 
-                                               required>
+                                        <input type="text"
+                                            class="form-control border-0 bg-light @error('name') is-invalid @enderror"
+                                            id="name" name="name" value="{{ old('name', $user->name) }}" required>
                                     </div>
                                     @error('name')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -121,17 +122,15 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="email" class="form-label small fw-bold text-secondary">EMAIL ADDRESS</label>
+                                    <label for="email" class="form-label small fw-bold text-secondary">EMAIL
+                                        ADDRESS</label>
                                     <div class="input-group">
                                         <span class="input-group-text border-0 bg-light">
                                             <i class="fas fa-envelope text-muted"></i>
                                         </span>
-                                        <input type="email" 
-                                               class="form-control border-0 bg-light @error('email') is-invalid @enderror"
-                                               id="email" 
-                                               name="email" 
-                                               value="{{ old('email', $user->email) }}" 
-                                               required>
+                                        <input type="email"
+                                            class="form-control border-0 bg-light @error('email') is-invalid @enderror"
+                                            id="email" name="email" value="{{ old('email', $user->email) }}" required>
                                     </div>
                                     @error('email')
                                         <div class="text-danger small mt-1">{{ $message }}</div>
@@ -139,15 +138,15 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="password" class="form-label small fw-bold text-secondary">NEW PASSWORD</label>
+                                    <label for="password" class="form-label small fw-bold text-secondary">NEW
+                                        PASSWORD</label>
                                     <div class="input-group">
                                         <span class="input-group-text border-0 bg-light">
                                             <i class="fas fa-lock text-muted"></i>
                                         </span>
-                                        <input type="password" 
-                                               class="form-control border-0 bg-light @error('password') is-invalid @enderror"
-                                               id="password" 
-                                               name="password">
+                                        <input type="password"
+                                            class="form-control border-0 bg-light @error('password') is-invalid @enderror"
+                                            id="password" name="password">
                                     </div>
                                     <div class="form-text small text-muted mt-1">Leave blank to keep current password</div>
                                     @error('password')
@@ -156,15 +155,14 @@
                                 </div>
 
                                 <div class="mb-4">
-                                    <label for="password_confirmation" class="form-label small fw-bold text-secondary">CONFIRM NEW PASSWORD</label>
+                                    <label for="password_confirmation"
+                                        class="form-label small fw-bold text-secondary">CONFIRM NEW PASSWORD</label>
                                     <div class="input-group">
                                         <span class="input-group-text border-0 bg-light">
                                             <i class="fas fa-lock text-muted"></i>
                                         </span>
-                                        <input type="password" 
-                                               class="form-control border-0 bg-light"
-                                               id="password_confirmation"
-                                               name="password_confirmation">
+                                        <input type="password" class="form-control border-0 bg-light"
+                                            id="password_confirmation" name="password_confirmation">
                                     </div>
                                 </div>
 
@@ -186,10 +184,8 @@
                             <p class="text-gray-600 mb-4">
                                 Once you delete your account, there is no going back. Please be certain.
                             </p>
-                            <button type="button" 
-                                    class="btn btn-danger delete-btn" 
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#deleteAccountModal">
+                            <button type="button" class="btn btn-danger delete-btn" data-bs-toggle="modal"
+                                data-bs-target="#deleteAccountModal">
                                 <i class="fas fa-trash me-2"></i>Delete Account
                             </button>
                         </div>
@@ -211,7 +207,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body py-4">
-                    <p class="mb-0">Are you sure you want to delete your account? This action cannot be undone and will permanently delete all your data.</p>
+                    <p class="mb-0">Are you sure you want to delete your account? This action cannot be undone and will
+                        permanently delete all your data.</p>
                 </div>
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
@@ -226,4 +223,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection

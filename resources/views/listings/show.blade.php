@@ -1,4 +1,6 @@
-<x-layout>
+@extends('layouts.app')
+
+@push('styles')
     <style>
         .job-listing-card {
             background: white;
@@ -6,23 +8,23 @@
             box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
             transition: all 0.2s ease-in-out;
         }
-        
+
         .job-listing-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
         }
-        
+
         .company-logo {
             width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 0.75rem;
         }
-        
+
         .tag-container {
             gap: 0.5rem;
         }
-        
+
         .listing-tag {
             background-color: #e2e8f0;
             color: #334155;
@@ -31,20 +33,22 @@
             font-size: 0.875rem;
             transition: all 0.2s ease;
         }
-        
+
         .listing-tag:hover {
             background-color: #cbd5e1;
         }
-        
+
         .contact-btn {
             transition: all 0.2s ease;
         }
-        
+
         .contact-btn:hover {
             transform: translateY(-1px);
         }
     </style>
+@endpush
 
+@section('content')
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-10">
@@ -52,11 +56,8 @@
                     <div class="row g-4">
                         <!-- Company Logo Section -->
                         <div class="col-md-4">
-                            <img 
-                                src="{{ $listing->logo ? asset('storage/'.$listing->logo) : asset('/images/hiring.jfif') }}" 
-                                class="company-logo shadow-sm"
-                                alt="{{ $listing->company }} logo"
-                            >
+                            <img src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('/images/hiring.jfif') }}"
+                                class="company-logo shadow-sm" alt="{{ $listing->company }} logo">
                         </div>
 
                         <!-- Job Details Section -->
@@ -97,12 +98,10 @@
                                 <!-- Action Buttons -->
                                 <div class="mt-auto">
                                     <div class="d-flex flex-wrap gap-2">
-                                        <a href="mailto:{{ $listing->email }}" 
-                                           class="btn btn-primary contact-btn">
+                                        <a href="mailto:{{ $listing->email }}" class="btn btn-primary contact-btn">
                                             <i class="fas fa-envelope me-2"></i>Contact Employer
                                         </a>
-                                        <a href="{{ $listing->website }}" 
-                                           class="btn btn-outline-secondary contact-btn">
+                                        <a href="{{ $listing->website }}" class="btn btn-outline-secondary contact-btn">
                                             <i class="fas fa-globe me-2"></i>Visit Website
                                         </a>
                                     </div>
@@ -114,4 +113,4 @@
             </div>
         </div>
     </div>
-</x-layout>
+@endsection

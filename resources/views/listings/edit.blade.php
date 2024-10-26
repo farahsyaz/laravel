@@ -1,4 +1,104 @@
-<x-layout>
+@extends('layouts.app')
+
+@push('styles')
+    <style>
+        /* Custom Styles */
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #4338CA;
+            --section-bg: #F8FAFC;
+        }
+
+        body {
+            background-color: #F1F5F9;
+            color: #1E293B;
+        }
+
+        /* Card Styles */
+        .main-card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .gradient-header {
+            background: linear-gradient(135deg, var(--primary), #818CF8);
+            padding: 3.5rem 2rem;
+        }
+
+        /* Form Sections */
+        .content-section {
+            background-color: var(--section-bg);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid #E2E8F0;
+        }
+
+        .section-icon {
+            color: var(--primary);
+            background-color: rgba(79, 70, 229, 0.1);
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            display: inline-flex;
+        }
+
+        /* Form Controls */
+        .form-control,
+        .form-select {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #E2E8F0;
+            font-size: 1rem;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: #475569;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Logo Upload */
+        .logo-upload .form-control {
+            padding: 0.875rem 1rem;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            font-weight: 500;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-submit:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-1px);
+            color: white;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .content-section {
+                padding: 1.5rem;
+            }
+
+            .gradient-header {
+                padding: 2.5rem 1.5rem;
+            }
+        }
+    </style>
+@endpush
+
+@section('content')
     <div class="min-vh-100 bg-light py-5">
         <div class="container">
             <div class="row justify-content-center">
@@ -85,9 +185,8 @@
                                             <div class="form-group">
                                                 <label class="form-label">Email Address</label>
                                                 <input type="email"
-                                                    class="form-control @error('email') is-invalid @enderror"
-                                                    name="email" value="{{ $listing->email }}"
-                                                    placeholder="contact@company.com">
+                                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                                    value="{{ $listing->email }}" placeholder="contact@company.com">
                                                 @error('email')
                                                     <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -193,103 +292,9 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <style>
-        /* Custom Styles */
-        :root {
-            --primary: #4F46E5;
-            --primary-dark: #4338CA;
-            --section-bg: #F8FAFC;
-        }
-
-        body {
-            background-color: #F1F5F9;
-            color: #1E293B;
-        }
-
-        /* Card Styles */
-        .main-card {
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .gradient-header {
-            background: linear-gradient(135deg, var(--primary), #818CF8);
-            padding: 3.5rem 2rem;
-        }
-
-        /* Form Sections */
-        .content-section {
-            background-color: var(--section-bg);
-            border-radius: 1rem;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border: 1px solid #E2E8F0;
-        }
-
-        .section-icon {
-            color: var(--primary);
-            background-color: rgba(79, 70, 229, 0.1);
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            display: inline-flex;
-        }
-
-        /* Form Controls */
-        .form-control,
-        .form-select {
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
-            border: 1px solid #E2E8F0;
-            font-size: 1rem;
-        }
-
-        .form-control:focus,
-        .form-select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        }
-
-        .form-label {
-            font-weight: 500;
-            color: #475569;
-            margin-bottom: 0.5rem;
-        }
-
-        /* Logo Upload */
-        .logo-upload .form-control {
-            padding: 0.875rem 1rem;
-        }
-
-        /* Submit Button */
-        .btn-submit {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 0.75rem;
-            font-weight: 500;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            background-color: var(--primary-dark);
-            transform: translateY(-1px);
-            color: white;
-        }
-
-        /* Responsive Adjustments */
-        @media (max-width: 768px) {
-            .content-section {
-                padding: 1.5rem;
-            }
-
-            .gradient-header {
-                padding: 2.5rem 1.5rem;
-            }
-        }
-    </style>
-
+@push('scripts')
     <script>
         // Form submission handling
         document.getElementById('editJobListingForm').addEventListener('submit', function(e) {
@@ -313,4 +318,4 @@
             }
         });
     </script>
-</x-layout>
+@endpush
