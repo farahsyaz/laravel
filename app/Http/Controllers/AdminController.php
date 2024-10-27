@@ -31,14 +31,14 @@ class AdminController extends Controller
                 ->orWhere('email', 'like', '%' . $search . '%');
         })->paginate(10);
 
-        return view('users.manage', compact('users', 'search'));
+        return view('admin.users.manage', compact('users', 'search'));
     }
 
 
     // Show user details
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
+        return view('admin.users.show', ['user' => $user]);
     }
 
     // Manage listings with user information
@@ -51,7 +51,7 @@ class AdminController extends Controller
     // Show edit form for user
     public function edit(User $user)
     {
-        return view('users.edit', ['user' => $user]);
+        return view('admin.users.edit', ['user' => $user]);
     }
 
     // Update user information
@@ -74,7 +74,7 @@ class AdminController extends Controller
         // Update the user with the validated fields
         $user->update($formFields);
 
-        return redirect()->route('admin.users')->with('message', 'User updated successfully');
+        return redirect()->route('admin.users.manage')->with('message', 'User updated successfully');
     }
 
     // Delete user
@@ -82,6 +82,6 @@ class AdminController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('admin.users')->with('message', 'User deleted successfully');
+        return redirect()->route('admin.users.manage')->with('message', 'User deleted successfully');
     }
 }

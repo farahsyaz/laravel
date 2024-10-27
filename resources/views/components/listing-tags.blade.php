@@ -1,8 +1,7 @@
 @props(['tagsCsv'])
 
 @php
-    $tags = explode(',', $tagsCsv);
-    // dd($tagsCsv);
+$tags = explode(',', $tagsCsv); 
 @endphp
 
 <div class="tags">

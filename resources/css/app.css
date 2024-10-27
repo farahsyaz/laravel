@@ -1,50 +1,28 @@
-@import 'components/navbar.css';
-@import 'components/footer.css';
-
 :root {
-    --primary: #4F46E5;
-    --primary-dark: #4338CA;
-    --secondary: #64748B;
+    --primary-dark-color: #4338CA;
     --surface: #F8FAFC;
     --surface-dark: #F1F5F9;
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    --secondary-color: #64748b;
+    --success-color: #10b981;
+    --background-color: #f8fafc;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --transition: all 0.3s ease;
+    --danger-color: #ef4444;
+    --success-color: #10b981;
+    --info-color: #3b82f6;
+    --warning-color: #ffc107;
+    --light: #f8f9fa;
+    --dark: #212529;
+    --text-muted: #64748b;
 }
 
 body {
-    background-color: var(--surface);
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%);
     font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-.btn-primary {
-    background-color: #4a90e2;
-    border-color: #4a90e2;
-    color: #ffffff;
-}
-
-.btn-primary:hover {
-    background-color: #3a7bc8;
-    border-color: #3a7bc8;
-}
-
-.btn-outline-primary {
-    color: #4a90e2;
-    border-color: #4a90e2;
-}
-
-.btn-outline-primary:hover {
-    background-color: #4a90e2;
-    color: #ffffff;
-}
-
-.alert {
-    position: relative;
-    padding: 1rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    margin: 1rem;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }

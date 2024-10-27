@@ -10,137 +10,69 @@
     <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
-    <!-- Scripts and Styles -->
-    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/js/app.js'])
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Optional: Additional Custom Styles for specific pages -->
+    <!-- Vite for main and custom CSS files -->
+    @vite(['resources/sass/app.scss', 'resources/css/app.css', 'resources/css/custom.css'])
+
     @stack('styles')
 </head>
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <!-- Include the navbar partial -->
+        @include('partials.navbar')
+
+        <!-- Main Content -->
+        <main class="py-4 mt-5">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo" height="32"
-                        class="me-2">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+                @if (session('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fas fa-check-circle me-2"></i>
+                        {{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                        @auth
-                            <x-nav-link route="listings.manage" icon="fas fa-tasks">Manage Listings</x-nav-link>
-
-                            @if (Auth::user()->is_admin)
-                                <x-nav-link route="admin.users" icon="fas fa-users">Manage Users</x-nav-link>
-                                <x-nav-link route="admin.dashboard" icon="fas fa-tachometer-alt">Admin
-                                    Dashboard</x-nav-link>
-                            @endif
-                        @endauth
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('user.profile') }}">
-                                        {{ __('Profile') }}
-                                    </a>
-
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
+                @yield('content')
             </div>
-        </nav>
-
-        <main class="py-4">
-            @if (session('message'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('message') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @yield('content')
         </main>
 
 
-        <footer class="py-4 mt-auto">
-            <div class="container">
-                <div class="row align-items-center g-4">
-                    <div class="col-md-6 text-center text-md-start">
-                        <p class="mb-0 text-secondary">&copy; {{ date('Y') }} {{ config('app.name') }}. All rights
-                            reserved.
-                        </p>
-                    </div>
-                    <div class="col-md-6 text-center text-md-end">
-                        <x-social-link href="https://www.facebook.com" icon="fab fa-facebook-f" />
-                        <x-social-link href="https://www.twitter.com" icon="fab fa-twitter" />
-                        <x-social-link href="https://www.linkedin.com" icon="fab fa-linkedin-in" />
-                        <x-social-link href="https://www.instagram.com" icon="fab fa-instagram" />
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- Include the footer partial -->
+        @include('partials.footer')
     </div>
-    @push('scripts')
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const alert = document.querySelector('.alert');
-                if (alert) {
-                    setTimeout(() => {
-                        alert.classList.add('fade');
-                        setTimeout(() => alert.remove(), 500);
-                    }, 3000); // 3 seconds before dismissing
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auto-dismiss alerts
+            const alert = document.querySelector('.alert');
+            if (alert) {
+                setTimeout(() => {
+                    alert.classList.add('fade');
+                    setTimeout(() => alert.remove(), 500);
+                }, 3000);
+            }
+
+            // Navbar scroll behavior
+            const navbar = document.querySelector('.navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+                } else {
+                    navbar.style.boxShadow = 'none';
                 }
             });
-        </script>
-    @endpush
+        });
+    </script>
 
     @stack('scripts')
 </body>

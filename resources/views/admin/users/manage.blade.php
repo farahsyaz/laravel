@@ -60,6 +60,23 @@
             letter-spacing: 0.05em;
         }
 
+        .user-badge {
+            padding: 0.35em 0.65em;
+            font-size: 0.75em;
+            font-weight: 600;
+            border-radius: 0.375rem;
+        }
+
+        .badge-admin {
+            background: #10b981;
+            color: white;
+        }
+
+        .badge-user {
+            background: #60a5fa;
+            color: white;
+        }
+
         .action-btn {
             width: 32px;
             height: 32px;
@@ -72,7 +89,7 @@
             margin: 0 0.125rem;
         }
 
-        .btn-create{
+        .btn-create {
             background: #6366f1;
             color: white;
         }
@@ -83,6 +100,7 @@
             border: none;
             text-decoration: none
         }
+
         .btn-edit {
             background: #eab308;
             color: white;
@@ -152,15 +170,15 @@
                 <div class="row align-items-center">
                     <div class="col-md-4 mb-3 mb-md-0">
                         <h3 class="m-0">
-                            <i class="fa fa-list-alt" aria-hidden="true"></i>
-                            Manage Listings
+                            <i class="fas fa-users me-2"></i>
+                            Manage Users
                         </h3>
                     </div>
                     <div class="col-md-6">
-                        <form action="{{ route('listings.manage') }}" method="GET" class="search-container">
+                        <form action="{{ route('admin.users') }}" method="GET" class="search-container">
                             <div class="input-group">
                                 <input type="text" name="search" class="form-control search-input"
-                                    placeholder="Search listings..." value="{{ request('search') }}">
+                                    placeholder="Search users..." value="{{ request('search') }}">
                                 <button type="submit" class="btn search-btn">
                                     <i class="fas fa-search me-2"></i>
                                     Search
@@ -169,17 +187,17 @@
                         </form>
                     </div>
                     <div class="col-md-2">
-                        <a href="{{ route('listings.create') }}" class="btn btn-primary btn-create"><i class="fas fa-plus"></i>
+                        <a href="#" class="btn btn-primary btn-create"><i class="fas fa-plus"></i>
                             Create</a>
                     </div>
                 </div>
             </div>
 
             <div class="card-body p-0">
-                @if ($listings->isEmpty())
+                @if ($users->isEmpty())
                     <div class="empty-state">
-                        <i class="fas fa-list-slash"></i>
-                        <h4>No Listings Found</h4>
+                        <i class="fas fa-user-slash"></i>
+                        <h4>No Users Found</h4>
                         <p class="text-muted">Try adjusting your search criteria</p>
                     </div>
                 @else
@@ -187,41 +205,49 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Company</th>
-                                    <th>Location</th>
-                                    @if (auth()->user() && auth()->user()->isAdmin())
-                                        <th>Posted By</th>
-                                    @endif
-                                    <th>Created</th>
-                                    <th>Actions</th>
-                                </tr>
+                                    <th>NAME</th>
+                                    <th>EMAIL</th>
+                                    <th>ROLE</th>
+                                    <th>JOINED</th>
+                                    <th>ACTIONS</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($listings as $listing)
+                                @foreach ($users as $user)
                                     <tr>
-                                        <td class="align-middle"> {{ $listing->title }}
-                                        </td>
-                                        <td class="align-middle">{{ $listing->company }}</td>
-                                        <td class="align-middle">{{ $listing->location }}</td>
-
-                                        @if (auth()->user() && auth()->user()->isAdmin())
-                                            <td>{{ $listing->user->name }}</td>
-                                        @endif
-
-                                        <td class="align-middle">{{ $listing->created_at->format('M d, Y') }}</td>
                                         <td class="align-middle">
-                                            <a href="/listings/{{ $listing->id }}" class="action-btn btn-view"
+                                            <div class="d-flex align-items-center">
+                                                <div class="avatar-placeholder me-3">
+                                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                                </div>
+                                                <div>
+                                                    {{ $user->name }}
+                                                    @if ($user->id == auth()->id())
+                                                        <span class="ms-2 text-muted">(You)</span>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="align-middle">{{ $user->email }}</td>
+                                        <td class="align-middle">
+                                            <span class="user-badge {{ $user->is_admin ? 'badge-admin' : 'badge-user' }}">
+                                                {{ $user->is_admin ? 'Admin' : 'User' }}
+                                            </span>
+                                        </td>
+                                        <td class="align-middle">{{ $user->created_at->format('M d, Y') }}</td>
+                                        <td class="align-middle">
+                                            <a href="{{ route('admin.users.show', $user) }}" class="action-btn btn-view"
                                                 title="View Details">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="/listings/{{ $listing->id }}/edit" class="action-btn btn-edit"
+                                            <a href="/admin/users/{{ $user->id }}/edit" class="action-btn btn-edit"
                                                 title="Edit User">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </a>
-                                            <x-confirm-delete :action="'/listings/' . $listing->id"
-                                                message="Are you sure you want to delete this listing?" />
+                                            <button type="button" class="action-btn btn-delete" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal{{ $user->id }}" title="Delete User">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -230,7 +256,7 @@
                     </div>
 
                     <div class="d-flex justify-content-center border-top">
-                        {{ $listings->links('vendor.pagination.bootstrap-5') }}
+                        {{ $users->links('vendor.pagination.bootstrap-5') }}
                     </div>
                 @endif
             </div>
