@@ -101,7 +101,7 @@ npm run dev
 ## 📸 Screenshots
 
 1. **Homepage**
-   ![Homepage](docs/screenshots/home.png))
+   ![Homepage](docs/screenshots/home.png)
 
 2. **Manage Job Listings**
    ![Manage Job Listings](docs/screeshots/manage-listings.png)
