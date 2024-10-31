@@ -11,6 +11,7 @@
 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -49,18 +50,19 @@
         @include('partials.footer')
     </div>
 
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const message = document.getElementById('session-message');
             if (message) {
                 // Hide the message after 5 seconds (5000 milliseconds)
                 setTimeout(() => {
-                    message.style.transition = 'opacity 0.5s ease'; 
+                    message.style.transition = 'opacity 0.5s ease';
                     message.style.opacity = '0';
                     setTimeout(() => {
                         message.remove(); // Remove the element after fading out
-                    }, 500); 
-                }, 5000); 
+                    }, 500);
+                }, 5000);
             }
         });
     </script>

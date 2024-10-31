@@ -62,17 +62,11 @@
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <button
-                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this user?')) document.getElementById('delete-form-{{ $user->id }}').submit();"
+                                                    onclick="openDeleteModal('{{ route('admin.users.destroy', $user->id) }}')"
                                                     class="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-lg shadow"
-                                                    title="Delete User" aria-label="Delete {{ $user->name }}">
+                                                    title="Delete User">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $user->id }}"
-                                                    action="{{ route('admin.users.destroy', $user->id) }}" method="POST"
-                                                    style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
                                             </div>
                                         </td>
 
@@ -88,4 +82,6 @@
             </div>
         </div>
     </div>
+
+    @include('components.delete-modal')
 @endsection

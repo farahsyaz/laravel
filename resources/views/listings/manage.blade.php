@@ -70,17 +70,11 @@
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <button
-                                                    onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this listing?')) document.getElementById('delete-form-{{ $listing->id }}').submit();"
+                                                    onclick="openDeleteModal('{{ route('listings.destroy', $listing->id) }}')"
                                                     class="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded-lg shadow"
                                                     title="Delete Listing">
                                                     <i class="fas fa-trash-alt"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $listing->id }}"
-                                                    action="{{ route('listings.destroy', $listing->id) }}" method="POST"
-                                                    style="display: none;">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
                                             </div>
                                         </td>
                                     </tr>
@@ -95,4 +89,6 @@
             </div>
         </div>
     </div>
+
+    @include('components.delete-modal') 
 @endsection
