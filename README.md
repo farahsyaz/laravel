@@ -1,94 +1,125 @@
-<p align="center">
-    <a href="https://github.com/lahiruanushka/JobFinderApp-Demo" target="_blank">
-        <img src="public/images/job-work-svgrepo-com.svg" width="100" alt="JobFinderApp Logo">
-    </a>
-</p>
+# 🌟 JobFinder: Professional Job Listing Platform
 
-# Job Posting App
+---
 
-Job Posting App is a straightforward job finding and posting application built with Laravel 11. Created for educational purposes and based on a YouTube tutorial, this app allows users to post job listings and search for job opportunities.
+## Overview
 
-## Features
+JobFinder is a powerful Laravel-based web application tailored for job seekers and employers. With a modern interface and user-friendly features, JobFinder offers an intuitive experience for posting and searching for jobs, while giving administrators comprehensive tools to manage platform content and users.
 
-- Post new job listings with details such as title, company, location, tags, and description.
-- Search for job listings using keywords.
-- View details of individual job listings.
-- Contact the employer directly through the provided email.
-- Visit the company's website for more information.
+---
 
-## Installation
+## 🚀 Key Features
 
-To set up the project locally, follow these steps:
+### User Experience
+- **🔐 Secure Authentication & Profile Management:** Register, log in, and manage your profile securely.
+- **📋 Job Posting & Management:** Post, edit, and manage your job listings with ease.
+- **🔍 Advanced Job Search:** Find job listings quickly using search filters.
+- **👤 Admin Dashboard:** Centralized dashboard for tracking users and listings.
 
-1. **Clone the repository:**
+### Administrator Capabilities
+- **🛡️ Platform Oversight:** Admin control panel for managing all users and job listings.
+- **📊 Analytics:** Track user activity and job listing performance.
+- **🚧 Content Moderation Tools:** Admin tools for removing or editing inappropriate content.
 
-    ```sh
-    git clone https://github.com/lahiruanushka/laravel-job-posting-app.git
-    cd laravel-job-posting-app
-    ```
+---
 
-2. **Install dependencies:**
+## 🖥️ Technology Stack
 
-    ```sh
-    composer install
-    npm install
-    ```
+### Backend
+- **Framework:** Laravel 10.x
+- **Authentication:** Laravel Breeze for secure login/logout
+- **ORM:** Eloquent for database interactions
+- **Queue Management:** Laravel Queue for handling background tasks
 
-3. **Create a copy of the `.env` file:**
+### Frontend
+- **Styling:** Tailwind CSS for a modern, responsive design
+- **Icons:** Heroicons and FontAwesome for clean, intuitive icons
 
-    ```sh
-    cp .env.example .env
-    ```
+### Database
+- **Primary:** MySQL
 
-4. **Generate the application key:**
+### Development Tools
+- **Package Management:** Composer and NPM
+- **Build Tools:** Vite
+- **Version Control:** Git
 
-    ```sh
-    php artisan key:generate
-    ```
+---
 
-5. **Set up the database:**
+## 📦 Prerequisites
 
-    - Update the database credentials in the `.env` file.
+- PHP 8.1+
+- Composer
+- Node.js 16+
 
-    ```dotenv
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=jobfinder_db
-    DB_USERNAME=root
-    DB_PASSWORD=
-    ```
+---
 
-    - Run the migrations:
+## 🛠️ Installation Guide
 
-    ```sh
-    php artisan migrate
-    ```
+### 1. Clone the Repository
+```bash
+git clone https://github.com/lahiruanushka/laravel-job-posting-app.git
+cd laravel-job-posting-app
+```
 
-    - Seed the database with dummy data:
+### 2. Install Dependencies
+```bash
+composer install
+npm install
+npm run build
+```
 
-    ```sh
-    php artisan db:seed
-    ```
+### 3. Environment Configuration
+```bash
+cp .env.example .env
+php artisan key:generate
+```
+Update `.env` with your database and other configuration details.
 
-6. **Start the development server:**
+### 4. Database Setup
+```bash
+php artisan migrate:fresh --seed
+php artisan storage:link
+```
 
-    ```sh
-    php artisan serve
-    ```
+### 5. Start Development Server
+```bash
+php artisan serve
+npm run dev
+```
 
-7. **Open your browser and navigate to `http://127.0.0.1:8000` to see the application.**
+---
 
-## Usage
+## 🔒 Security Features
 
-- **Posting a Job:** Navigate to the job posting form and fill in the required details to post a new job listing.
-- **Searching for Jobs:** Use the search bar to find job listings that match your keywords.
-- **Viewing Job Details:** Click on a job title to view more details about the job, contact the employer, or visit the company website.
+- **Role-based Access Control:** Separate permissions for users and administrators.
+- **CSRF Protection:** Prevents cross-site request forgery.
+- **XSS Prevention:** Input sanitization to prevent attacks.
+- **Secure Password Hashing:** Protects user passwords with hashing.
 
-## Contributing
+---
 
-Contributions are welcome! Please fork this repository and submit a pull request with your changes. For major changes, please open an issue to discuss what you would like to change.
+## 📸 Screenshots
 
-## License
+1. **Homepage**
+   ![Homepage](docs/screenshots/home.png))
 
-This project is open-source and available under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Manage Job Listings**
+   ![Manage Job Listings](docs/screeshots/manage-listings.png)
+
+3. **Admin Dashboard**
+   ![Admin Dashboard](docs/screenshots/dashboard.png)
+
+4. **Job Listing Page**
+   ![Job Listing](docs/screenshots/show-listing.png)
+
+5. **Create Job Listing**
+   ![Create Job](docs/screenshots/create-listing.png)
+
+6. **Update Job Listing**
+   ![Update Job](docs/screenshots/update-listing.png)
+
+7. **User Profile Management**
+   ![Profile Management](docs/screenshots/update-profile.png)
+
+8. **Manage Users**
+   ![Manage Users](docs/screeshots/manage-users.png)
