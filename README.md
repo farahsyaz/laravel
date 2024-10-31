@@ -112,14 +112,14 @@ npm run dev
 4. **Job Listing Page**
    ![Job Listing](docs/screenshots/show-listing.png)
 
-5. **Create Job Listing**
-   ![Create Job](docs/screenshots/create-listing.png)
-
-6. **Update Job Listing**
-   ![Update Job](docs/screenshots/update-listing.png)
-
-7. **User Profile Management**
+5. **User Profile Management**
    ![Profile Management](docs/screenshots/update-profile.png)
 
-8. **Manage Users**
+6. **Manage Users**
    ![Manage Users](docs/screeshots/manage-users.png)
+
+7. **Login**
+   ![Login](docs/screeshots/login.png)
+
+8. **Register**
+   ![Register](docs/screeshots/register.png)
