@@ -104,7 +104,7 @@ npm run dev
    ![Homepage](docs/screenshots/home.png)
 
 2. **Manage Job Listings**
-   ![Manage Job Listings](docs/screeshots/manage-listings.png)
+   ![Manage Job Listings](docs/screenshots/manage-listings.png)
 
 3. **Admin Dashboard**
    ![Admin Dashboard](docs/screenshots/dashboard.png)
@@ -116,10 +116,10 @@ npm run dev
    ![Profile Management](docs/screenshots/update-profile.png)
 
 6. **Manage Users**
-   ![Manage Users](docs/screeshots/manage-users.png)
+   ![Manage Users](docs/screenshots/manage-users.png)
 
 7. **Login**
-   ![Login](docs/screeshots/login.png)
+   ![Login](docs/screenshots/login.png)
 
-8. **Register**
-   ![Register](docs/screeshots/register.png)
+9. **Register**
+   ![Register](docs/screenshots/register.png)
