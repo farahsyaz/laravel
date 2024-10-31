@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
-use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
-class UserController extends Controller
+class ProfileController extends Controller
 {
     public function edit()
     {
-        return view('user.edit', ['user' => auth()->user()]);
+        $user = auth()->user(); // Get the currently authenticated user
+        return view('profile.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request): RedirectResponse
     {
         $user = auth()->user();
 
@@ -26,18 +26,20 @@ class UserController extends Controller
             'password' => 'nullable|string|min:6|confirmed',
         ]);
 
+        // Only hash and set the password if it's filled
         if ($request->filled('password')) {
             $formFields['password'] = Hash::make($formFields['password']);
         } else {
+            // Do not include password in the update array if not filled
             unset($formFields['password']);
         }
 
         $user->update($formFields);
 
-        return redirect()->route('user.profile')->with('message', 'Profile updated successfully');
+        return redirect()->route('profile.edit')->with('message', 'Profile updated successfully');
     }
 
-    public function destroy()
+    public function destroy(): RedirectResponse
     {
         $user = auth()->user();
         auth()->logout();

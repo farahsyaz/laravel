@@ -1,110 +1,58 @@
 @extends('layouts.app')
 
-@push('styles')
-    <style>
-        .job-listing-card {
-            background: white;
-            border-radius: 1rem;
-            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            transition: all 0.2s ease-in-out;
-        }
-
-        .job-listing-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-        }
-
-        .company-logo {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 0.75rem;
-        }
-
-        .tag-container {
-            gap: 0.5rem;
-        }
-
-        .listing-tag {
-            background-color: #e2e8f0;
-            color: #334155;
-            padding: 0.35rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.875rem;
-            transition: all 0.2s ease;
-        }
-
-        .listing-tag:hover {
-            background-color: #cbd5e1;
-        }
-
-        .contact-btn {
-            transition: all 0.2s ease;
-        }
-
-        .contact-btn:hover {
-            transform: translateY(-1px);
-        }
-    </style>
-@endpush
-
 @section('content')
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="job-listing-card p-4">
-                    <div class="row g-4">
+    <div class="container mx-auto py-8">
+        <div class="flex justify-center">
+            <div class="w-full lg:w-10/12">
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <!-- Company Logo Section -->
-                        <div class="col-md-4">
+                        <div class="flex justify-center md:justify-start">
                             <img src="{{ $listing->logo ? asset('storage/' . $listing->logo) : asset('/images/hiring.jfif') }}"
-                                class="company-logo shadow-sm" alt="{{ $listing->company }} logo">
+                                class="w-64 h-64 object-cover shadow-md rounded-md" alt="{{ $listing->company }} logo">
                         </div>
 
                         <!-- Job Details Section -->
-                        <div class="col-md-8">
-                            <div class="d-flex flex-column h-100">
-                                <!-- Header -->
-                                <div class="mb-4">
-                                    <h1 class="h2 mb-3">{{ $listing->title }}</h1>
-                                    <div class="d-flex flex-wrap tag-container">
-                                        <x-listing-tags :tagsCsv="$listing->tags" />
+                        <div class="flex flex-col h-full">
+                            <!-- Header -->
+                            <div class="mb-4">
+                                <h1 class="text-3xl font-semibold text-gray-800 mb-2">{{ $listing->title }}</h1>
+                                <div class="flex flex-wrap gap-2">
+                                    <x-listing-tags :tagsCsv="$listing->tags" />
+                                </div>
+                            </div>
+
+                            <!-- Company Info -->
+                            <div class="mb-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-building text-blue-500 mr-2"></i>
+                                        <span>{{ $listing->company }}</span>
+                                    </div>
+                                    <div class="flex items-center text-gray-700">
+                                        <i class="fas fa-map-marker-alt text-blue-500 mr-2"></i>
+                                        <span>{{ $listing->location }}</span>
                                     </div>
                                 </div>
+                            </div>
 
-                                <!-- Company Info -->
-                                <div class="mb-4">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-building text-secondary me-2"></i>
-                                                <span>{{ $listing->company }}</span>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="d-flex align-items-center">
-                                                <i class="fas fa-map-marker-alt text-secondary me-2"></i>
-                                                <span>{{ $listing->location }}</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <!-- Job Description -->
+                            <div class="mb-6">
+                                <h5 class="text-xl font-semibold text-gray-800 mb-2">About This Role</h5>
+                                <p class="text-gray-600">{{ $listing->description }}</p>
+                            </div>
 
-                                <!-- Job Description -->
-                                <div class="mb-4">
-                                    <h5 class="mb-3">About This Role</h5>
-                                    <p class="text-secondary">{{ $listing->description }}</p>
-                                </div>
-
-                                <!-- Action Buttons -->
-                                <div class="mt-auto">
-                                    <div class="d-flex flex-wrap gap-2">
-                                        <a href="mailto:{{ $listing->email }}" class="btn btn-primary contact-btn">
-                                            <i class="fas fa-envelope me-2"></i>Contact Employer
-                                        </a>
-                                        <a href="{{ $listing->website }}" class="btn btn-outline-secondary contact-btn">
-                                            <i class="fas fa-globe me-2"></i>Visit Website
-                                        </a>
-                                    </div>
+                            <!-- Action Buttons -->
+                            <div class="mt-auto">
+                                <div class="flex flex-wrap gap-4">
+                                    <a href="mailto:{{ $listing->email }}"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md flex items-center shadow-md transition duration-200">
+                                        <i class="fas fa-envelope mr-2"></i>Contact Employer
+                                    </a>
+                                    <a href="{{ $listing->website }}"
+                                        class="border border-blue-500 text-blue-500 hover:bg-blue-50 px-4 py-2 rounded-md flex items-center shadow-md transition duration-200">
+                                        <i class="fas fa-globe mr-2"></i>Visit Website
+                                    </a>
                                 </div>
                             </div>
                         </div>

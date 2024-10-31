@@ -9,25 +9,37 @@ class Listing extends Model
 {
     use HasFactory;
 
-    //  protected $fillable = [
-    //     'title', 'tags', 'company', 'location', 'email', 'website', 'description'
-    // ];
-    
-    public function scopeFilter($query, array $filters){
-        if($filters['tag'] ?? false){
-            $query->where('tags','like','%'.request('tag').'%');
+    protected $fillable = [
+        'company',
+        'logo',
+        'email',
+        'website',
+        'location',
+        'title',
+        'tags',
+        'description'
+    ];
+
+    protected $casts = [
+        'tags' => 'array'
+    ];
+
+    public function scopeFilter($query, array $filters)
+    {
+        if ($filters['tag'] ?? false) {
+            $query->where('tags', 'like', '%' . request('tag') . '%');
         }
 
-      if ($filters['search'] ?? false) {
-    $query->where('title', 'like', '%' . request('search') . '%')
-          ->orWhere('description', 'like', '%' . request('search') . '%')
-          ->orWhere('tags', 'like', '%' . request('search') . '%');
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%')
+                ->orWhere('tags', 'like', '%' . request('search') . '%');
         }
     }
 
     // Relationship to User
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
-
 }

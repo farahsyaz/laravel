@@ -1,6 +1,1 @@
-import './bootstrap';
-
-import * as bootstrap from 'bootstrap';
-
-// Make bootstrap globally available
-window.bootstrap = bootstrap;
+import '@fortawesome/fontawesome-free/css/all.css';

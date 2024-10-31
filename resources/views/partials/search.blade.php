@@ -1,63 +1,29 @@
-@push('styles')
-    <style>
-        .search-form {
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 50px;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
 
-        .search-form:focus-within {
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .search-input {
-            border: none;
-            padding: 15px 20px;
-            font-size: 1.1rem;
-            border-radius: 50px 0 0 50px;
-        }
-
-        .search-input:focus {
-            box-shadow: none;
-        }
-
-        .search-btn {
-            background-color: #6e8efb;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.1rem;
-            border-radius: 0 50px 50px 0;
-            transition: background-color 0.3s ease;
-        }
-
-        .search-btn:hover {
-            background-color: #5c7cfa;
-        }
-
-        @media (max-width: 767.98px) {
-            .search-btn {
-                padding: 15px 20px;
-            }
-        }
-    </style>
-@endpush
-
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <form class="search-form">
-                <div class="input-group">
-                    <input type="search" class="form-control search-input" placeholder="Search for jobs..."
-                        aria-label="Search" name="search">
-                    <button class="btn search-btn" type="submit">
-                        <i class="fas fa-search"></i>
-                        <span class="d-none d-md-inline">Search</span>
-                    </button>
+<section class="bg-gray-100 py-8">
+    <div class="container mx-auto px-4">
+        <div class="bg-white rounded-lg shadow-md p-6 -mt-16 relative z-10 max-w-5xl mx-auto">
+            <form action="" method="GET">
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            name="search" 
+                            class="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors duration-200"
+                            placeholder="Search jobs by title, company, or keywords..."
+                            value="{{ request('search') }}"
+                        >
+                    </div>
+                    <div class="md:w-32">
+                        <button 
+                            type="submit" 
+                            class="w-full bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center"
+                        >
+                            <i class="fas fa-search mr-2"></i>
+                            Search
+                        </button>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
+</section>

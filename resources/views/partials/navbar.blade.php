@@ -1,78 +1,96 @@
-<nav class="navbar navbar-expand-md navbar-light fixed-top">
-  <div class="container">
-      <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
-          <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo" height="40"
-              class="me-2">
-          <span>{{ config('app.name', 'Laravel') }}</span>
-      </a>
+<nav class="bg-white shadow-md fixed top-0 w-full z-50">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between h-16">
+            <div class="flex items-center">
+                <a href="{{ url('/') }}" class="flex items-center">
+                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo" class="h-10 w-auto mr-2">
+                    <span class="text-xl font-semibold">{{ config('app.name', 'Laravel') }}</span>
+                </a>
+            </div>
 
-      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+            <!-- Mobile menu button -->
+            <div class="flex items-center md:hidden">
+                <button type="button"
+                    class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100"
+                    @click="open = !open" aria-expanded="false">
+                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <!-- Left Side Of Navbar -->
-          <ul class="navbar-nav me-auto">
-              @auth
-                  <x-nav-link route="listings.manage" icon="fa fa-list-alt">
-                      Manage Listings
-                  </x-nav-link>
+            <!-- Desktop menu -->
+            <div class="hidden md:flex md:items-center md:space-x-4">
+                <!-- Left Side -->
+                @auth
+                    <a href="{{ route('listings.index') }}"
+                        class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                        <i class="fa fa-list-alt mr-2"></i>Manage Listings
+                    </a>
 
-                  @if (Auth::user()->is_admin)
-                      <x-nav-link route="admin.users" icon="fas fa-users">
-                          Manage Users
-                      </x-nav-link>
-                      <x-nav-link route="admin.dashboard" icon="fas fa-tachometer-alt">
-                          </i>Dashboard
-                      </x-nav-link>
-                  @endif
-              @endauth
-          </ul>
+                    @if (Auth::user()->is_admin)
+                        <a href="{{ route('admin.users.index') }}"
+                            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                            <i class="fas fa-users mr-2"></i>Manage Users
+                        </a>
+                        <a href="{{ route('admin.dashboard') }}"
+                            class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                            <i class="fas fa-tachometer-alt mr-2"></i>Dashboard
+                        </a>
+                    @endif
+                @endauth
 
-          <!-- Right Side Of Navbar -->
-          <ul class="navbar-nav ms-auto">
-              @guest
-                  @if (Route::has('login'))
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('login') }}">
-                              <i class="fas fa-sign-in-alt"></i>{{ __('Login') }}
-                          </a>
-                      </li>
-                  @endif
+                <!-- Right Side -->
+                <div class="flex items-center ml-4">
+                    @guest
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}"
+                                class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-sign-in-alt mr-2"></i>{{ __('Login') }}
+                            </a>
+                        @endif
 
-                  @if (Route::has('register'))
-                      <li class="nav-item">
-                          <a class="nav-link" href="{{ route('register') }}">
-                              <i class="fas fa-user-plus"></i>{{ __('Register') }}
-                          </a>
-                      </li>
-                  @endif
-              @else
-                  <li class="nav-item dropdown">
-                      <a id="navbarDropdown" class="nav-link dropdown-toggle d-flex align-items-center"
-                          href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
-                          aria-expanded="false" v-pre>
-                          <i class="fas fa-user-circle me-2"></i>
-                          {{ Auth::user()->name }}
-                      </a>
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                                class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-user-plus mr-2"></i>{{ __('Register') }}
+                            </a>
+                        @endif
+                    @else
+                        <div class="relative" x-data="{ open: false }">
+                            <button @click="open = !open"
+                                class="flex items-center text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                                <i class="fas fa-user-circle mr-2"></i>
+                                {{ Auth::user()->name }}
+                                <svg class="ml-2 h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </button>
 
-                      <div class="dropdown-menu dropdown-menu-end fade-in">
-                          <a class="dropdown-item" href="{{ route('user.profile') }}">
-                              <i class="fas fa-user me-2"></i>{{ __('Profile') }}
-                          </a>
-                          <div class="dropdown-divider"></div>
-                          <a class="dropdown-item" href="{{ route('logout') }}"
-                              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                              <i class="fas fa-sign-out-alt me-2"></i>{{ __('Logout') }}
-                          </a>
-                          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                              @csrf
-                          </form>
-                      </div>
-                  </li>
-              @endguest
-          </ul>
-      </div>
-  </div>
+                            <div x-show="open" @click.away="open = false"
+                                class="absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                                <div class="py-1">
+                                    <a href="{{ route('profile.edit') }}"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                        <i class="fas fa-user mr-2"></i>{{ __('Profile') }}
+                                    </a>
+                                    <div class="border-t border-gray-100"></div>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit"
+                                            class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                                            <i class="fas fa-sign-out-alt mr-2"></i>{{ __('Logout') }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endguest
+                </div>
+            </div>
+        </div>
+    </div>
 </nav>
