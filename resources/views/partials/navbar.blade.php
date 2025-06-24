@@ -2,9 +2,8 @@
     <div class="container mx-auto px-4">
         <div class="flex justify-between h-16">
             <div class="flex items-center">
-                <a href="{{ url('/') }}" class="flex items-center">
-                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo" class="h-10 w-auto mr-2">
-                    <span class="text-xl font-semibold">{{ config('app.name', 'Laravel') }}</span>
+                <a href="{{ url('/') }}" class="flex items-center"> 
+                    <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }} Logo" class="h-12 w-auto mr-2">
                 </a>
             </div>
 
@@ -24,12 +23,13 @@
             <div class="hidden md:flex md:items-center md:space-x-4">
                 <!-- Left Side -->
                 @auth
-                    <a href="{{ route('listings.index') }}"
+                   
+
+                    @if (Auth::user()->is_admin)
+                     <a href="{{ route('listings.index') }}"
                         class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                         <i class="fa fa-list-alt mr-2"></i>Manage Listings
                     </a>
-
-                    @if (Auth::user()->is_admin)
                         <a href="{{ route('admin.users.index') }}"
                             class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
                             <i class="fas fa-users mr-2"></i>Manage Users
